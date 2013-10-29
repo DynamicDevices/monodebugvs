@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoDebugVS", "MonoDebugVS\MonoDebugVS.csproj", "{EDC77A20-C315-42EC-9365-ACF11BE6DD58}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B3946227-4A95-4E84-8953-388E0485E513}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EDC77A20-C315-42EC-9365-ACF11BE6DD58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDC77A20-C315-42EC-9365-ACF11BE6DD58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDC77A20-C315-42EC-9365-ACF11BE6DD58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDC77A20-C315-42EC-9365-ACF11BE6DD58}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VisualSVNWorkingCopyRoot = .
+	EndGlobalSection
+EndGlobal

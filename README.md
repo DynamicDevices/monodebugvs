@@ -1,4 +1,4 @@
-monodebugvs
+MonoDebugVS
 ===========
 
-Mono Debugging Plugin for Visual Studio
+Mono Debugging Add-in for Visual Studio (2010)
