@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoDebugVS", "MonoDebugVS\MonoDebugVS.csproj", "{EDC77A20-C315-42EC-9365-ACF11BE6DD58}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicDevices.MonoDebugVS", "MonoDebugVS\DynamicDevices.MonoDebugVS.csproj", "{EDC77A20-C315-42EC-9365-ACF11BE6DD58}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B3946227-4A95-4E84-8953-388E0485E513}"
 	ProjectSection(SolutionItems) = preProject
@@ -9,16 +9,34 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DynamicDevices.MonoDebugVS.Installer", "DynamicDevices.MonoDebugVS.Installer\DynamicDevices.MonoDebugVS.Installer.vdproj", "{4873C6BF-5F57-4B2E-9883-5BB2E088B866}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{EDC77A20-C315-42EC-9365-ACF11BE6DD58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EDC77A20-C315-42EC-9365-ACF11BE6DD58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDC77A20-C315-42EC-9365-ACF11BE6DD58}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{EDC77A20-C315-42EC-9365-ACF11BE6DD58}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{EDC77A20-C315-42EC-9365-ACF11BE6DD58}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{EDC77A20-C315-42EC-9365-ACF11BE6DD58}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDC77A20-C315-42EC-9365-ACF11BE6DD58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDC77A20-C315-42EC-9365-ACF11BE6DD58}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{EDC77A20-C315-42EC-9365-ACF11BE6DD58}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{EDC77A20-C315-42EC-9365-ACF11BE6DD58}.Release|x86.ActiveCfg = Release|Any CPU
+		{4873C6BF-5F57-4B2E-9883-5BB2E088B866}.Debug|Any CPU.ActiveCfg = Debug
+		{4873C6BF-5F57-4B2E-9883-5BB2E088B866}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{4873C6BF-5F57-4B2E-9883-5BB2E088B866}.Debug|x86.ActiveCfg = Debug
+		{4873C6BF-5F57-4B2E-9883-5BB2E088B866}.Release|Any CPU.ActiveCfg = Release
+		{4873C6BF-5F57-4B2E-9883-5BB2E088B866}.Release|Mixed Platforms.ActiveCfg = Release
+		{4873C6BF-5F57-4B2E-9883-5BB2E088B866}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

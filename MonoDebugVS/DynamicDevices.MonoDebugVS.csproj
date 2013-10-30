@@ -8,8 +8,8 @@
     <ProjectGuid>{EDC77A20-C315-42EC-9365-ACF11BE6DD58}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MonoDebugVS</RootNamespace>
-    <AssemblyName>MonoDebugVS</AssemblyName>
+    <RootNamespace>DynamicDevices.MonoDebugVS</RootNamespace>
+    <AssemblyName>DynamicDevices.MonoDebugVS</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -21,6 +21,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <RegisterForComInterop>false</RegisterForComInterop>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -46,25 +48,56 @@
     <Reference Include="extensibility, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.CommandBars, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="Microsoft.VisualStudio.Debugger.Interop.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Windows\assembly\GAC_MSIL\Microsoft.VisualStudio.Debugger.Interop.10.0\10.0.0.0__b03f5f7f11d50a3a\Microsoft.VisualStudio.Debugger.Interop.10.0.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Debugger.InteropA, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Windows\assembly\GAC\Microsoft.VisualStudio.Debugger.InteropA\9.0.0.0__b03f5f7f11d50a3a\Microsoft.VisualStudio.Debugger.InteropA.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.OLE.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\assembly\GAC\Microsoft.VisualStudio.OLE.Interop\7.1.40304.0__b03f5f7f11d50a3a\Microsoft.VisualStudio.OLE.Interop.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\assembly\GAC_MSIL\Microsoft.VisualStudio.Shell\2.0.0.0__b03f5f7f11d50a3a\Microsoft.VisualStudio.Shell.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\assembly\GAC\Microsoft.VisualStudio.Shell.Interop\7.1.40304.0__b03f5f7f11d50a3a\Microsoft.VisualStudio.Shell.Interop.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AD7ProgramProvider.cs" />
     <Compile Include="Connect.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="AD7Engine.cs" />
+    <Compile Include="Installer.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegistryHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="DD-All.ico" />
-    <Content Include="MonoDebugVS.AddIn" />
+    <Content Include="MonoDebugVS.AddIn">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CommandBar.resx" />
@@ -73,8 +106,8 @@
   <PropertyGroup>
     <PostBuildEvent>REM If you are running an old version of Windows (e.g. XP) then change "Documents" to "My Documents" as the naming convention has changed post-Vista
 
-xcopy /y "$(ProjectDir)$(OutDir)MonoDebugVS.dll" "%25USERPROFILE%25\Documents\Visual Studio 2010\Addins"
-xcopy /y "$(ProjectDir)$(OutDir)MonoDebugVS.pdb"  "%25USERPROFILE%25\Documents\Visual Studio 2010\Addins"
+xcopy /y "$(ProjectDir)$(OutDir)DynamicDevices.MonoDebugVS.dll" "%25USERPROFILE%25\Documents\Visual Studio 2010\Addins"
+xcopy /y "$(ProjectDir)$(OutDir)DynamicDevices.MonoDebugVS.pdb"  "%25USERPROFILE%25\Documents\Visual Studio 2010\Addins"
 xcopy /y "$(ProjectDir)MonoDebugVS.AddIn" "%25USERPROFILE%25\Documents\Visual Studio 2010\Addins"
 </PostBuildEvent>
   </PropertyGroup>

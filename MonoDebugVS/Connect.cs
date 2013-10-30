@@ -1,14 +1,20 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Reflection;
 using System.Resources;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using EnvDTE;
 using EnvDTE80;
 using Extensibility;
 using Microsoft.VisualStudio.CommandBars;
+using Microsoft.VisualStudio.Shell.Interop;
+using Microsoft.Win32;
 
-namespace MonoDebugVS
+namespace DynamicDevices.MonoDebugVS
 {
     public class Connect : IDTExtensibility2, IDTCommandTarget
     {
@@ -57,7 +63,10 @@ namespace MonoDebugVS
             if (connectMode != ext_ConnectMode.ext_cm_UISetup)
                 return;
 
-            // Handle different locales
+            // Create registry keys (should have been done by installer but just in case...)
+            RegistryHelper.SetupRegistry();
+
+            // Handle different locales););););
             try
             {
                 var resourceManager = new ResourceManager("MonoDebugVS.CommandBar", Assembly.GetExecutingAssembly());
@@ -136,18 +145,30 @@ namespace MonoDebugVS
         {
             if (executeOption == vsCommandExecOption.vsCommandExecOptionDoDefault)
             {
-                if (cmdName == "MonoDebugVS.Connect.MonoDebug")
+                if (cmdName == "DynamicDevices.MonoDebugVS.Connect.MonoDebug")
                 {
                     // Here's where we lauch the debugger!
                     var sb = _thisAddin.DTE.Solution.SolutionBuild;
-
+                
                     // Anything set?
                     if (sb.StartupProjects == null)
                         return;
 
-                    foreach (var project in (Array)sb.StartupProjects)
+                    // TODO: Should probably check this is a C# project here...
+
+                    foreach (string projectName in (Array)sb.StartupProjects)
                     {
-                        MessageBox.Show("Starting: " + project);
+                        var project = _thisAddin.DTE.Solution.Item(projectName); 
+	 
+	                    var projectPath = (string)project.Properties.Item("FullPath").Value; 
+	                    var outputPath = (string)project.ConfigurationManager.ActiveConfiguration.Properties.Item("OutputPath").Value; 
+	                    var outputFileName = (string)project.Properties.Item("OutputFileName").Value; 
+	                    var debugSymbols = (bool)project.ConfigurationManager.ActiveConfiguration.Properties.Item("DebugSymbols").Value;
+
+                        var fileName = projectPath + outputPath + outputFileName;
+
+                        if(File.Exists(fileName))
+                            LaunchDebugTarget(fileName);
                     }
 
                     return;
@@ -159,7 +180,7 @@ namespace MonoDebugVS
         {
             if (neededText == vsCommandStatusTextWanted.vsCommandStatusTextWantedNone)
             {
-                if (cmdName == "MonoDebugVS.Connect.MonoDebug")
+                if (cmdName == "DynamicDevices.MonoDebugVS.Connect.MonoDebug")
                 {
 
                     // TODO: Add in code somewhere to enable/disable the command based on whether we have a startup project
@@ -184,5 +205,44 @@ namespace MonoDebugVS
         }
 
         #endregion
+
+        /// <summary>
+        /// Launch an executible using the sample debug engine.
+        /// </summary>
+        private void LaunchDebugTarget(string filePath)
+        {
+            var sp = new Microsoft.VisualStudio.Shell.ServiceProvider((Microsoft.VisualStudio.OLE.Interop.IServiceProvider)_thisApplication);
+
+            var dbg = (IVsDebugger)sp.GetService(typeof(SVsShellDebugger));
+
+            var info = new VsDebugTargetInfo();
+            info.cbSize = (uint)System.Runtime.InteropServices.Marshal.SizeOf(info);
+            info.dlo = DEBUG_LAUNCH_OPERATION.DLO_CreateProcess;
+
+            info.bstrExe = filePath;
+            info.bstrCurDir = System.IO.Path.GetDirectoryName(info.bstrExe);
+            info.bstrArg = null; // no command line parameters
+            info.bstrRemoteMachine = null; // debug locally
+            info.fSendStdoutToOutputWindow = 0; // Let stdout stay with the application.
+            info.clsidCustom = new Guid("{67e9d912-bd2d-49b7-9214-5d2595a39a5f}"); // Set the launching engine the sample engine guid
+            info.grfLaunch = 0;
+
+            IntPtr pInfo = System.Runtime.InteropServices.Marshal.AllocCoTaskMem((int)info.cbSize);
+            System.Runtime.InteropServices.Marshal.StructureToPtr(info, pInfo, false);
+
+            try
+            {
+                dbg.LaunchDebugTargets(1, pInfo);
+            }
+            finally
+            {
+                if (pInfo != IntPtr.Zero)
+                {
+                    System.Runtime.InteropServices.Marshal.FreeCoTaskMem(pInfo);
+                }
+            }
+
+        }
+
     }
 }
