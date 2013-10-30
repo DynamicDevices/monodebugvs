@@ -1,4 +1,6 @@
-﻿using System.Reflection;
+﻿using System;
+using System.IO;
+using System.Reflection;
 using Microsoft.Win32;
 
 namespace DynamicDevices.MonoDebugVS
@@ -11,10 +13,6 @@ namespace DynamicDevices.MonoDebugVS
 
         public static void SetupRegistry()
         {
-
-            var key1 = Registry.LocalMachine.CreateSubKey("SOFTWARE\\Test");
-            key1.Close();
-
             //
             // Register up the COM server
             //
@@ -36,20 +34,21 @@ namespace DynamicDevices.MonoDebugVS
             key.SetValue("guidScriptEng", "{F200A7E7-DEA5-11D0-B854-00A0244A1DE2}");
             key.Close();
 
+            var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Path.DirectorySeparatorChar +
+                       "Visual Studio 2010\\Addins\\" + new FileInfo(Assembly.GetExecutingAssembly().Location).Name;
+
             key = Registry.LocalMachine.CreateSubKey("SOFTWARE\\Microsoft\\VisualStudio\\10.0\\CLSID\\" + _engine);
             key.SetValue("Assembly", "DynamicDevices.MonoDebugVS");
             key.SetValue("Class", "DynamicDevices.MonoDebugVS.AD7Engine");
             key.SetValue("InProcServer32", "c:\\windows\\system32\\mscoree.dll");
-            var codebase = Assembly.GetExecutingAssembly().CodeBase + "\\DynamicDevices.MonoDebugVS.dll";
-            key.SetValue("CodeBase", codebase);
+            key.SetValue("CodeBase", path);
             key.Close();
 
             key = Registry.LocalMachine.CreateSubKey("SOFTWARE\\Microsoft\\VisualStudio\\10.0\\CLSID\\" + _programprovider);
             key.SetValue("Assembly", "DynamicDevices.MonoDebugVS");
             key.SetValue("Class", "DynamicDevices.MonoDebugVS.AD7ProgramProvider");
             key.SetValue("InProcServer32", "c:\\windows\\system32\\mscoree.dll");
-            codebase = Assembly.GetExecutingAssembly().CodeBase + "\\DynamicDevices.MonoDebugVS.dll";
-            key.SetValue("CodeBase", codebase);
+            key.SetValue("CodeBase", path);
             key.Close();
         }
 

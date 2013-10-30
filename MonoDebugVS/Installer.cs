@@ -13,8 +13,6 @@ namespace DynamicDevices.MonoDebugVS
     {
         public override void Install(System.Collections.IDictionary stateSaver)
         {
-            MessageBox.Show("Setting up registry");
-
             try
             {
                 RegistryHelper.SetupRegistry();
@@ -28,8 +26,6 @@ namespace DynamicDevices.MonoDebugVS
 
         public override void Uninstall(System.Collections.IDictionary savedState)
         {
-            MessageBox.Show("Cleaning up registry");
-
             try
             {
                 RegistryHelper.CleanRegistry();

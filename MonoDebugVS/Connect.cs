@@ -1,18 +1,14 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Resources;
-using System.Runtime.InteropServices;
-using System.Windows.Forms;
 using EnvDTE;
 using EnvDTE80;
 using Extensibility;
 using Microsoft.VisualStudio.CommandBars;
+using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
-using Microsoft.Win32;
 
 namespace DynamicDevices.MonoDebugVS
 {
@@ -106,17 +102,17 @@ namespace DynamicDevices.MonoDebugVS
                 var status = (int) vsCommandStatus.vsCommandStatusSupported +
                              (int) vsCommandStatus.vsCommandStatusEnabled;
 
-                //var style = (int) vsCommandStyle.vsCommandStylePictAndText;
-                var style = (int)vsCommandStyle.vsCommandStyleText;
+                var style = (int) vsCommandStyle.vsCommandStylePictAndText;
+                //var style = (int)vsCommandStyle.vsCommandStyleText;
 
                 var type = vsCommandControlType.vsCommandControlTypeButton;
 
-                var command = commands.AddNamedCommand2(_thisAddin, "MonoDebug", "Debug with Mono", "Debugs the current project with Mono", false, 59, ref contextGUIDS, status, style, type);
+                var command = commands.AddNamedCommand2(_thisAddin, "MonoDebug", "Debug with Mono", "Debugs the current project with Mono", true, 156, ref contextGUIDS, status, style, type);
 
-                //Add a control for the command to the tools menu:
+                //Add a control for the command to the debug  menu:
                 if ((command != null) && (debugPopup!= null))
                 {
-                    command.AddControl(debugPopup.CommandBar, 1);
+                    command.AddControl(debugPopup.CommandBar, 3);
                 }
             }
             catch (ArgumentException)
@@ -211,6 +207,7 @@ namespace DynamicDevices.MonoDebugVS
         /// </summary>
         private void LaunchDebugTarget(string filePath)
         {
+
             var sp = new Microsoft.VisualStudio.Shell.ServiceProvider((Microsoft.VisualStudio.OLE.Interop.IServiceProvider)_thisApplication);
 
             var dbg = (IVsDebugger)sp.GetService(typeof(SVsShellDebugger));
@@ -243,6 +240,5 @@ namespace DynamicDevices.MonoDebugVS
             }
 
         }
-
     }
 }
