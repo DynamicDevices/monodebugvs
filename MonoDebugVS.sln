@@ -6,12 +6,22 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B3946227-4A95-4E84-8953-388E0485E513}"
 	ProjectSection(SolutionItems) = preProject
 		LICENSE = LICENSE
+		Local.testsettings = Local.testsettings
+		MonoDebugVS.vsmdi = MonoDebugVS.vsmdi
 		README.md = README.md
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DynamicDevices.MonoDebugVS.Installer", "DynamicDevices.MonoDebugVS.Installer\DynamicDevices.MonoDebugVS.Installer.vdproj", "{4873C6BF-5F57-4B2E-9883-5BB2E088B866}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Libs", "Libs\Libs.csproj", "{290ADE6B-FF3C-45C7-B898-2BB86F5CDE4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicDevices.MonoDebugVS.Tests", "DynamicDevices.MonoDebugVS.Tests\DynamicDevices.MonoDebugVS.Tests.csproj", "{CCA23050-6947-4699-9819-C94F13B2C85E}"
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = MonoDebugVS.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -37,6 +47,24 @@ Global
 		{4873C6BF-5F57-4B2E-9883-5BB2E088B866}.Release|Any CPU.ActiveCfg = Release
 		{4873C6BF-5F57-4B2E-9883-5BB2E088B866}.Release|Mixed Platforms.ActiveCfg = Release
 		{4873C6BF-5F57-4B2E-9883-5BB2E088B866}.Release|x86.ActiveCfg = Release
+		{290ADE6B-FF3C-45C7-B898-2BB86F5CDE4C}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{290ADE6B-FF3C-45C7-B898-2BB86F5CDE4C}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{290ADE6B-FF3C-45C7-B898-2BB86F5CDE4C}.Debug|x86.ActiveCfg = Debug|x86
+		{290ADE6B-FF3C-45C7-B898-2BB86F5CDE4C}.Debug|x86.Build.0 = Debug|x86
+		{290ADE6B-FF3C-45C7-B898-2BB86F5CDE4C}.Release|Any CPU.ActiveCfg = Release|x86
+		{290ADE6B-FF3C-45C7-B898-2BB86F5CDE4C}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{290ADE6B-FF3C-45C7-B898-2BB86F5CDE4C}.Release|x86.ActiveCfg = Release|x86
+		{290ADE6B-FF3C-45C7-B898-2BB86F5CDE4C}.Release|x86.Build.0 = Release|x86
+		{CCA23050-6947-4699-9819-C94F13B2C85E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCA23050-6947-4699-9819-C94F13B2C85E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCA23050-6947-4699-9819-C94F13B2C85E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{CCA23050-6947-4699-9819-C94F13B2C85E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{CCA23050-6947-4699-9819-C94F13B2C85E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CCA23050-6947-4699-9819-C94F13B2C85E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCA23050-6947-4699-9819-C94F13B2C85E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCA23050-6947-4699-9819-C94F13B2C85E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{CCA23050-6947-4699-9819-C94F13B2C85E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{CCA23050-6947-4699-9819-C94F13B2C85E}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
